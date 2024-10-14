@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <Description>OpenTelemetry .NET SDK - Test</Description>
+  </PropertyGroup>
+
+</Project>
