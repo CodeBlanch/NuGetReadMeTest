@@ -70,9 +70,9 @@
     <PropertyGroup>
       <_PackageReleaseNotesFilePath>$([System.IO.Path]::GetFullPath('$(PackageReleaseNotesFile)').Replace('$(RepoRoot)', '').Replace('\', '/'))</_PackageReleaseNotesFilePath>
       <_PackageChangelogFilePath>$([System.IO.Path]::GetFullPath('$(PackageChangelogFile)').Replace('$(RepoRoot)', '').Replace('\', '/'))</_PackageChangelogFilePath>
-      <PackageReleaseNotes>For highlights and announcements see: <a href="$(GitHubPermalinkUrl)$(_PackageReleaseNotesFilePath)">RELEASENOTES</a>.
+      <PackageReleaseNotes>For highlights and announcements see: $(GitHubPermalinkUrl)$(_PackageReleaseNotesFilePath).
 
-For detailed changes see:  <a href="$(GitHubPermalinkUrl)$(_PackageChangelogFilePath)">CHANGELOG</a>.</PackageReleaseNotes>
+For detailed changes see: $(GitHubPermalinkUrl)$(_PackageChangelogFilePath).</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
