@@ -1,1 +1,3 @@
 # Mian repo RELEASENOTES
+
+[See README](./README.md)
