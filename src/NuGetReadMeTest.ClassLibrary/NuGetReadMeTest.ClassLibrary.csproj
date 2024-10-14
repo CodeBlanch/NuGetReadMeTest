@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net8.0</TargetFrameworks>
     <Description>OpenTelemetry .NET SDK - Test</Description>
+    <PackageVersion>1.0.0.1</PackageVersion>
   </PropertyGroup>
 
 </Project>
