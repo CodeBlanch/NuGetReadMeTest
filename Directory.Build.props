@@ -20,7 +20,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>RELEASENOTES.md</PackageReleaseNotes>
+    <PackageReleaseNotesFile>$(RepoRoot)\RELEASENOTES.md</PackageReleaseNotesFile>
   </PropertyGroup>
 
   <Target Name="IncludeReadmeAndReleaseNotesInPackages" BeforeTargets="_GetTargetFrameworksOutput">
@@ -53,7 +53,6 @@
 
     <ItemGroup>
       <PackageMarkdownFiles Include="README.md" />
-      <PackageMarkdownFiles Include="$(RepoRoot)\RELEASENOTES.md" />
     </ItemGroup>
 
     <ItemGroup>
@@ -65,6 +64,10 @@
         Lines="$([System.Text.RegularExpressions.Regex]::Replace($([System.IO.File]::ReadAllText(%(PackageMarkdownFiles.FullPath))), '\[([^]]+?)\]\(\.(.+?)\)', '[$1]($(GitHubPermalinkUrl)%(PackageMarkdownFiles.Path).$2)').Replace('/', '\'))"
         Overwrite="true"
         Encoding="UTF-8"/>
+
+    <PropertyGroup>
+        <PackageReleaseNotes>$([System.Text.RegularExpressions.Regex]::Replace($([System.IO.File]::ReadAllText($(PackageReleaseNotesFile))), '\[([^]]+?)\]\(\.(.+?)\)', '[$1]($(GitHubPermalinkUrl)%(PackageMarkdownFiles.Path).$2)').Replace('/', '\'))</PackageReleaseNotes>
+    </PropertyGroup>
 
     <ItemGroup>
       <Content Include="$(BaseIntermediateOutputPath)*.md" PackagePath="/" />

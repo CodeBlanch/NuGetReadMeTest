@@ -1,3 +1,3 @@
-# Mian repo RELEASENOTES
+# Main repo RELEASENOTES
 
 [See README](./README.md)
