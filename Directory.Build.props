@@ -20,6 +20,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageChangelogFile>CHANGELOG.md</PackageChangelogFile>
     <PackageReleaseNotesFile>$(RepoRoot)\RELEASENOTES.md</PackageReleaseNotesFile>
   </PropertyGroup>
 
@@ -67,7 +68,11 @@
         Encoding="UTF-8"/>
 
     <PropertyGroup>
-        <PackageReleaseNotes>$([System.Text.RegularExpressions.Regex]::Replace($([System.IO.File]::ReadAllText($(PackageReleaseNotesFile))), '$(MarkdownCommentRegex)', '[$1]($(GitHubPermalinkUrl)/.$2)').Replace('\', '/'))</PackageReleaseNotes>
+      <_PackageReleaseNotesFilePath>$([System.IO.Path]::GetFullPath('$(PackageReleaseNotesFile)').Replace('$(RepoRoot)', '').Replace('\', '/'))</_PackageReleaseNotesFilePath>
+      <_PackageChangelogFilePath>$([System.IO.Path]::GetFullPath('$(PackageChangelogFile)').Replace('$(RepoRoot)', '').Replace('\', '/'))</_PackageChangelogFilePath>
+      <PackageReleaseNotes>For highlights and announcements see: <a href="$(GitHubPermalinkUrl)$(_PackageReleaseNotesFilePath)">RELEASENOTES</a>.
+
+For detailed changes see:  <a href="$(GitHubPermalinkUrl)$(_PackageChangelogFilePath)">CHANGELOG</a>.</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
