@@ -46,6 +46,7 @@
     </Exec>
 
     <PropertyGroup>
+      <MarkdownCommentRegex>\[([^]]+?)\]\(\.(.+?)\)</MarkdownCommentRegex>
       <GitHubPermalinkUrl>$(GitOriginConsoleOutput.Replace('.git',''))/blob/$(GitCommitConsoleOutput)</GitHubPermalinkUrl>
     </PropertyGroup>
 
@@ -61,12 +62,12 @@
 
     <WriteLinesToFile
         File="$(BaseIntermediateOutputPath)%(PackageMarkdownFiles.Filename)%(PackageMarkdownFiles.Extension)"
-        Lines="$([System.Text.RegularExpressions.Regex]::Replace($([System.IO.File]::ReadAllText(%(PackageMarkdownFiles.FullPath))), '\[([^]]+?)\]\(\.(.+?)\)', '[$1]($(GitHubPermalinkUrl)%(PackageMarkdownFiles.Path).$2)').Replace('/', '\'))"
+        Lines="$([System.Text.RegularExpressions.Regex]::Replace($([System.IO.File]::ReadAllText(%(PackageMarkdownFiles.FullPath))), '$(MarkdownCommentRegex)', '[$1]($(GitHubPermalinkUrl)%(PackageMarkdownFiles.Path).$2)').Replace('\', '/'))"
         Overwrite="true"
         Encoding="UTF-8"/>
 
     <PropertyGroup>
-        <PackageReleaseNotes>$([System.Text.RegularExpressions.Regex]::Replace($([System.IO.File]::ReadAllText($(PackageReleaseNotesFile))), '\[([^]]+?)\]\(\.(.+?)\)', '[$1]($(GitHubPermalinkUrl)%(PackageMarkdownFiles.Path).$2)').Replace('/', '\'))</PackageReleaseNotes>
+        <PackageReleaseNotes>$([System.Text.RegularExpressions.Regex]::Replace($([System.IO.File]::ReadAllText($(PackageReleaseNotesFile))), '$(MarkdownCommentRegex)', '[$1]($(GitHubPermalinkUrl)/.$2)').Replace('\', '/'))</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
